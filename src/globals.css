@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: rgb(var(--background));
+  --color-surface: rgb(var(--surface));
+  --color-primary: rgb(var(--primary));
+  --background: 255 255 255;
+  --surface: 245 245 245;
+  --primary: 98 0 238;
+}
+
+.dark {
+  --background: 18 18 18 !important;
+  --surface: 36 36 36;
+  --primary: 187 134 252 !important;
+
+  --color-background: rgb(var(--background));
+  --color-surface: rgb(var(--surface));
+  --color-primary: rgb(var(--primary));
+}
