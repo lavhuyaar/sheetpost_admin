@@ -1,12 +1,8 @@
 import { createContext, ReactNode, useState } from "react";
+import { IUser } from "../types/interfaces";
 
-interface ContextValues {
-  userInfo?: string | null; //Change later
-  loginUser?: (info: string) => void; //Change later
-  logoutUser?: () => void;
-}
 
-const AuthContext = createContext<ContextValues | null>(null);
+const AuthContext = createContext<IUser | null>(null);
 
 export const AuthProvider = ({ children }: { children?: ReactNode }) => {
   const [userInfo, setUserInfo] = useState<string | null>(null); //Change later

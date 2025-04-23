@@ -1,7 +1,9 @@
 const Footer = () => {
   return (
-    <footer className="w-full flex items-center justify-center bg-red-400">
-      <p className="max-w-screen-2xl w-full px-4 py-2 bg-amber-800">&copy; lavhuyaar. All rights reserved.</p>
+    <footer className="w-full flex items-center justify-center bg-primary text-white ">
+      <p className="max-w-screen-2xl w-full px-4 pt-2 py-1 text-center ">
+        &copy; lavhuyaar. All rights reserved.
+      </p>
     </footer>
   );
 };

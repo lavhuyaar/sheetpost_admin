@@ -1,20 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-background: rgb(var(--background));
-  --color-surface: rgb(var(--surface));
-  --color-primary: rgb(var(--primary));
   --background: 255 255 255;
   --surface: 245 245 245;
   --primary: 98 0 238;
+  --primary-txt: 0 0 0;
+
+  --color-background: rgba(var(--background));
+  --color-surface: rgba(var(--surface));
+  --color-primary: rgba(var(--primary));
+  --color-primary-txt: rgba(var(--primary-txt));
 }
 
 .dark {
-  --background: 18 18 18 !important;
+  --background: 18 18 18;
   --surface: 36 36 36;
-  --primary: 187 134 252 !important;
+  --primary: 187 134 252;
+  --primary-txt: 255 255 255;
 
-  --color-background: rgb(var(--background));
-  --color-surface: rgb(var(--surface));
-  --color-primary: rgb(var(--primary));
+  --color-background: rgba(var(--background));
+  --color-surface: rgba(var(--surface));
+  --color-primary: rgba(var(--primary));
+  --color-primary-txt: rgba(var(--primary-txt));
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(var(--background));
+  color: rgba(var(--primary-txt));
+  font-family: "Lexend", sans-serif;
+  position: relative;
 }

@@ -1,25 +1,42 @@
 import { NavLink } from "react-router";
 import { useAuth } from "../hooks/useAuth";
+import ThemeToggler from "./ThemeToggler";
 
 const Header = () => {
-  const { userInfo } = useAuth();
+  const { userInfo, logoutUser } = useAuth();
 
   return (
-    <header className="w-full flex items-center justify-center bg-amber-950 text-white">
-      <nav className="w-full max-w-screen-2xl flex justify-around bg-green-300 px-4 py-2">
-        <NavLink to="/">LOGO</NavLink>
+    <header className="w-full flex items-center justify-center sticky bg-primary text-white z-999 top-0">
+      <nav className="w-full max-w-screen-2xl flex items-center justify-between px-4 py-2">
+        <NavLink to="/" className="text-3xl font-bold align-middle">
+          LOGO
+        </NavLink>
 
-        <div>
+        <div className="flex items-center gap-4">
+          <ThemeToggler />
           {userInfo ? (
-            <button>Log out</button>
+            <button
+              onClick={logoutUser}
+              className="px-2 py-1 rounded-lg hover:bg-background/40 transition text-white"
+            >
+              Log out
+            </button>
           ) : (
             <>
-              <NavLink to="sign-up">Sign up</NavLink>
-              <NavLink to="/login">Login</NavLink>
+              <NavLink
+                className="px-2 py-1 rounded-lg hover:bg-background/40 transition"
+                to="/sign-up"
+              >
+                Sign Up
+              </NavLink>
+              <NavLink
+                className="px-2 py-1 rounded-lg hover:bg-background/40 transition"
+                to="/login"
+              >
+                Login
+              </NavLink>
             </>
           )}
-
-          <button>Toggle </button>
         </div>
       </nav>
     </header>

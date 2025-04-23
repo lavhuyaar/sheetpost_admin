@@ -5,9 +5,14 @@ import Home from "../pages/Home";
 import PageNotFound from "../pages/PageNotFound";
 import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
+import { ToastContainer } from "react-toastify";
+import useTheme from "../hooks/useTheme";
 
 const AppRoutes = () => {
+
+  const {theme} = useTheme();
   return (
+    <>
     <BrowserRouter>
       <Routes>
         <Route path="" element={<Home />} />
@@ -16,6 +21,12 @@ const AppRoutes = () => {
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
+    <ToastContainer
+          theme={theme}
+          pauseOnHover={false}
+          draggable={false}
+        />
+    </>
   );
 };
 
