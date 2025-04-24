@@ -1,4 +1,11 @@
-import { ICustomInput } from "../types/interfaces";
+interface ICustomInput {
+  name: string;
+  placeholder?: string;
+  type: string;
+  errorMessage: string | undefined;
+  labelText?: string;
+  register: any;
+}
 
 const CustomInput: React.FC<ICustomInput> = ({
   name,
@@ -16,7 +23,7 @@ const CustomInput: React.FC<ICustomInput> = ({
         </label>
         <input
           autoComplete="off"
-          className="border-primary-txt/40 focus:outline-none align-middle border rounded-md px-3 py-2"
+          className="border-text-primary/10 focus:outline-none align-middle border rounded-md px-3 py-2"
           {...register(name, { required: true })}
           type={type}
           placeholder={placeholder}

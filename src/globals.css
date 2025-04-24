@@ -2,27 +2,50 @@
 @import "tailwindcss";
 
 @theme {
-  --background: 255 255 255;
-  --surface: 245 245 245;
-  --primary: 98 0 238;
-  --primary-txt: 0 0 0;
-
-  --color-background: rgba(var(--background));
-  --color-surface: rgba(var(--surface));
-  --color-primary: rgba(var(--primary));
-  --color-primary-txt: rgba(var(--primary-txt));
-}
-
-.dark {
-  --background: 18 18 18;
-  --surface: 36 36 36;
-  --primary: 187 134 252;
+  --background: 245 245 245; /* soft off-white */
+  --surface: 255 255 255;
+  --primary: 131 117 105; /* #837569 */
+  --primary-hover: 112 100 89; /* darkened version */
   --primary-txt: 255 255 255;
 
+  --text-primary: 33 33 33; /* dark gray/black */
+  --text-secondary: 87 87 87;
+  --text-muted: 136 136 136;
+
+  --hover-bg: 240 240 240;
+
   --color-background: rgba(var(--background));
   --color-surface: rgba(var(--surface));
   --color-primary: rgba(var(--primary));
+  --color-primary-hover: rgba(var(--primary-hover));
   --color-primary-txt: rgba(var(--primary-txt));
+  --color-text-primary: rgb(var(--text-primary));
+  --color-text-secondary: rgb(var(--text-secondary));
+  --color-text-muted: rgb(var(--text-muted));
+  --color-hover-bg: rgb(var(--hover-bg));
+}
+.dark {
+  --background: 20 20 20;
+  --surface: 35 35 35;
+  --primary: 131 117 105; /* #837569 */
+  --primary-hover: 163 147 133; /* lighter tone for hover in dark mode */
+  --primary-txt: 255 255 255;
+
+  --text-primary: 225 225 225; /* light gray */
+  --text-secondary: 180 180 180;
+  --text-muted: 140 140 140;
+
+  --hover-bg: 45 45 45;
+
+  --color-background: rgba(var(--background));
+  --color-surface: rgba(var(--surface));
+  --color-primary: rgba(var(--primary));
+  --color-primary-hover: rgba(var(--primary-hover));
+  --color-primary-txt: rgba(var(--primary-txt));
+  --color-text-primary: rgb(var(--text-primary));
+  --color-text-secondary: rgb(var(--text-secondary));
+  --color-text-muted: rgb(var(--text-muted));
+  --color-hover-bg: rgb(var(--hover-bg));
 }
 
 #root {

@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <main className="min-h-screen w-full">i'm home</main>
+      <main className="min-h-screen w-full bg-background text-text-primary">i'm home</main>
       <Footer />
     </>
   );
