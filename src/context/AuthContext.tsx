@@ -1,15 +1,33 @@
 import { createContext, ReactNode, useState } from "react";
-import { IUser } from "../types/interfaces";
+import { IUser } from "../intefaces";
 
+interface IAuth {
+  userInfo: IUser | null;
+  loginUser: (info: IUser, token: string) => void;
+  logoutUser: () => void;
+}
 
-const AuthContext = createContext<IUser | null>(null);
+const AuthContext = createContext<IAuth | null>(null);
 
 export const AuthProvider = ({ children }: { children?: ReactNode }) => {
-  const [userInfo, setUserInfo] = useState<string | null>(null); //Change later
+  const localUser = JSON.parse(localStorage.getItem("userInfo") || "null");
+  const [userInfo, setUserInfo] = useState<IUser | null>(localUser);
 
-  const loginUser = (info: string) => setUserInfo(info);
+  const loginUser = (info: IUser, token: string) => {
+    setUserInfo(info);
 
-  const logoutUser = () => setUserInfo(null);
+    //Stores credentials and authToken in localStorage
+    localStorage.setItem("userInfo", JSON.stringify(info));
+    localStorage.setItem("authToken", token);
+  };
+
+  const logoutUser = () => {
+    setUserInfo(null); //Removes userInfo
+
+    //Clears localStorage
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("authToken");
+  };
 
   return (
     <AuthContext.Provider value={{ userInfo, loginUser, logoutUser }}>

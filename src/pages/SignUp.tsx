@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { ISignUpFormValues } from "../types/interfaces";
-import { signUpSchema } from "../validators/validators";
+import signUpSchema from "../validators/signUpSchema";
 
 import axiosInstance from "../api/axiosInstance";
 
@@ -13,12 +12,21 @@ import CustomInput from "../components/CustomInput";
 import handleAxiosError from "../utils/handleAxiosError";
 import { toast } from "react-toastify";
 
+interface ISignUpFormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirm_password: string;
+}
+
 const SignUp = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ISignUpFormValues>({ resolver: yupResolver(signUpSchema) });
 
@@ -29,6 +37,7 @@ const SignUp = () => {
       await axiosInstance.post("/signUpAdmin", values);
       toast.dismiss();
       toast.success("Profile created");
+      reset();
     } catch (error) {
       handleAxiosError(error, "Failed to Sign up");
     } finally {
@@ -39,7 +48,7 @@ const SignUp = () => {
   return (
     <>
       <Header />
-      <main className="p-6 sm:px-[5%] py-10 gap-5 bg-background min-h-screen flex items-center justify-center flex-col text-primary-txt w-full max-w-screen-2xl">
+      <main className="p-6 sm:px-[5%] py-10 gap-5 items-center justify-center">
         <h1 className="text-[26px] text-center font-semibold">
           Sign Up to be an Author @Sheetpost
         </h1>
@@ -93,7 +102,7 @@ const SignUp = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="mt-2 cursor-pointer text-white bg-primary px-4 py-2 rounded-lg text-xl hover:bg-background/40 transition hover:text-primary-txt"
+            className="mt-2 text-md font-semibold cursor-pointer text-primary-txt  bg-primary px-4 py-2 rounded-lg hover:bg-primary-hover transition"
           >
             Create new profile
           </button>

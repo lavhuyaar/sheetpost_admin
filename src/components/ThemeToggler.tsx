@@ -6,7 +6,7 @@ const ThemeToggler = () => {
 
   return (
     <>
-      <button type="button" title={`Change theme (currently ${theme})`} className="cursor-pointer text-2xl p-2 rounded-full hover:bg-background/40 transition" onClick={toggleTheme}>
+      <button type="button" title={`Change theme (currently ${theme})`} className="cursor-pointer text-primary-txt text-2xl p-2 rounded-full hover:bg-primary-hover transition" onClick={toggleTheme}>
         {theme === "dark" ? (
           <IoSunnyOutline />
         ) : (

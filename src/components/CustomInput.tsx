@@ -1,4 +1,12 @@
-import { ICustomInput } from "../types/interfaces";
+interface ICustomInput {
+  name: string;
+  placeholder?: string;
+  type: string;
+  value?: boolean | string;
+  errorMessage?: string | undefined;
+  labelText?: string;
+  register: any;
+}
 
 const CustomInput: React.FC<ICustomInput> = ({
   name,
@@ -7,6 +15,7 @@ const CustomInput: React.FC<ICustomInput> = ({
   type,
   placeholder,
   errorMessage,
+  value
 }) => {
   return (
     <>
@@ -16,7 +25,8 @@ const CustomInput: React.FC<ICustomInput> = ({
         </label>
         <input
           autoComplete="off"
-          className="border-primary-txt/40 focus:outline-none align-middle border rounded-md px-3 py-2"
+          value={value}
+          className="border-text-primary/10 focus:outline-none align-middle border rounded-md px-3 py-2"
           {...register(name, { required: true })}
           type={type}
           placeholder={placeholder}
