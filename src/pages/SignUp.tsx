@@ -11,6 +11,7 @@ import Header from "../components/Header";
 import CustomInput from "../components/CustomInput";
 import handleAxiosError from "../utils/handleAxiosError";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 interface ISignUpFormValues {
   firstName: string;
@@ -22,6 +23,7 @@ interface ISignUpFormValues {
 
 const SignUp = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -30,16 +32,18 @@ const SignUp = () => {
     formState: { errors },
   } = useForm<ISignUpFormValues>({ resolver: yupResolver(signUpSchema) });
 
+
   const onSubmit: SubmitHandler<ISignUpFormValues> = async (values) => {
     toast.loading("Creating new profile...");
     setSubmitting(true);
     try {
       await axiosInstance.post("/signUpAdmin", values);
       toast.dismiss();
-      toast.success("Profile created");
+      toast.success("Profile created successfully!");
+      navigate('/login', {replace: true})
       reset();
     } catch (error) {
-      handleAxiosError(error, "Failed to Sign up");
+      handleAxiosError(error, "Failed to Sign Up!");
     } finally {
       setSubmitting(false);
     }

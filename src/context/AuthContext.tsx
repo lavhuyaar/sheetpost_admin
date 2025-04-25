@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 import { IUser } from "../intefaces";
+import { toast } from "react-toastify";
 
 interface IAuth {
   userInfo: IUser | null;
@@ -27,6 +28,7 @@ export const AuthProvider = ({ children }: { children?: ReactNode }) => {
     //Clears localStorage
     localStorage.removeItem("userInfo");
     localStorage.removeItem("authToken");
+    toast.success("Author logged out sucessfully!");
   };
 
   return (

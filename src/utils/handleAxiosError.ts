@@ -1,11 +1,24 @@
 import { isAxiosError } from "axios";
+import { SetStateAction } from "react";
 import { toast } from "react-toastify";
 
-const handleAxiosError = (error: unknown, helperMessage: string) => {
-  console.error(error + " :: " + helperMessage);
+const handleAxiosError = (
+  error: unknown,
+  helperMessage?: string,
+  setError?: React.Dispatch<
+    SetStateAction<{ status?: number; message?: string } | undefined>
+  >
+) => {
+  console.error(error, helperMessage ? ` :: ${helperMessage}` : "");
   if (isAxiosError(error)) {
     toast.dismiss();
-    toast.error(error?.response?.data?.message); //Error snackbar
+    toast.error(error.response?.data?.message || helperMessage); //Error snackbar
+    if (setError) {
+      setError({
+        status: error.status,
+        message: error.response?.data?.message || 'Internal Server Error',
+      });
+    }
   } else {
     toast.dismiss();
     toast.error("An error occured! Please try again!");

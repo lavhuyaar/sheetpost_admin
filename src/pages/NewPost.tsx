@@ -9,12 +9,7 @@ import handleAxiosError from "../utils/handleAxiosError";
 import CustomInput from "../components/CustomInput";
 import newPostSchema from "../validators/newPostSchema";
 import { useNavigate } from "react-router";
-
-interface IPostFormValues {
-  title: string;
-  content: string;
-  isPublished: boolean;
-}
+import { IPostFormValues } from "../intefaces";
 
 const NewPost = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -34,8 +29,8 @@ const NewPost = () => {
     try {
       await axiosInstance.post("/posts/new", values);
       toast.dismiss();
-      toast.success("Post created");
-      navigate('/posts', {replace: true});
+      toast.success("Post created successfully!");
+      navigate("/posts", { replace: true });
       reset();
     } catch (error) {
       handleAxiosError(error, "Failed to Sign up");
@@ -102,7 +97,7 @@ const NewPost = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="mt-2 text-md font-semibold cursor-pointer text-primary-txt  bg-primary px-4 py-2 rounded-lg hover:bg-primary-hover transition"
+            className="mt-2 primary-btn"
           >
             Create new post
           </button>
