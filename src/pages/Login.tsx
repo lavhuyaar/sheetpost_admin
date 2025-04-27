@@ -1,14 +1,17 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
+
+import useAuth from "../hooks/useAuth";
 import handleAxiosError from "../utils/handleAxiosError";
+
 import Header from "../components/Header";
 import CustomInput from "../components/CustomInput";
 import Footer from "../components/Footer";
+
 import loginSchema from "../validators/loginSchema";
-import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router";
 
 interface LoginFormValues {
   email: string;

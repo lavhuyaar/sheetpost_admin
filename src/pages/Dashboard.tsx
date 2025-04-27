@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router";
 import { MdOutlineComment, MdOutlineNewLabel } from "react-icons/md";
 import { PiReadCvLogoBold } from "react-icons/pi";
 
-import { useAuth } from "../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";

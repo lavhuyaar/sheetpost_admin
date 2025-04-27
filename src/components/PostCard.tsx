@@ -103,7 +103,7 @@ const PostCard: React.FC<PostProps> = ({
       <DeleteModal
         isModalOpen={isModalOpen}
         closeModal={closeModal}
-        deletePost={() => onDelete(id)}
+        deleteFunc={() => onDelete(id)}
         warningMessage="Do you confirm to delete this post?"
         disclaimer="(it cannot be restored later, all the related comments will be deleted)"
       />

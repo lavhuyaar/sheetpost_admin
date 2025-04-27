@@ -1,7 +1,7 @@
 import Modal from "./Modal";
 
 interface IDeleteModalProps {
-  deletePost: VoidFunction;
+  deleteFunc: VoidFunction;
   closeModal: VoidFunction;
   isModalOpen: boolean;
   warningMessage: string;
@@ -9,7 +9,7 @@ interface IDeleteModalProps {
 }
 
 const DeleteModal = ({
-  deletePost,
+  deleteFunc,
   isModalOpen,
   closeModal,
   warningMessage,
@@ -31,7 +31,7 @@ const DeleteModal = ({
         <button onClick={closeModal} className="secondary-btn">
           Cancel
         </button>
-        <button onClick={deletePost} className="primary-btn">
+        <button onClick={deleteFunc} className="primary-btn">
           Delete
         </button>
       </div>

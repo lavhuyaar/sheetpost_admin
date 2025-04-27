@@ -285,7 +285,7 @@ const PostDetail = () => {
       <Footer />
 
       <DeleteModal
-        deletePost={handleOnDelete}
+        deleteFunc={handleOnDelete}
         closeModal={closeModal}
         isModalOpen={isModalOpen}
         warningMessage="Do you confirm to delete this post?"
