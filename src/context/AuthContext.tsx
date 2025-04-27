@@ -3,6 +3,7 @@ import { IUser } from "../interfaces";
 import axiosInstance from "../api/axiosInstance";
 import handleAxiosError from "../utils/handleAxiosError";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 interface IAuth {
   userInfo: IUser | null;
@@ -46,6 +47,7 @@ export const AuthProvider = ({ children }: { children?: ReactNode }) => {
     //Clears localStorage
     localStorage.removeItem("userCredentials");
     localStorage.removeItem("authToken");
+    toast.success("Author logged out sucessfully!");
   };
 
   return (
