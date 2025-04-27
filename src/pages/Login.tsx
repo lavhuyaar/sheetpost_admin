@@ -2,7 +2,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import axiosInstance from "../api/axiosInstance";
 import handleAxiosError from "../utils/handleAxiosError";
 import Header from "../components/Header";
 import CustomInput from "../components/CustomInput";
@@ -26,14 +25,10 @@ const Login = () => {
     //Redirects to the protected route after user logs in
     if (userInfo) {
       const searchParams = new URLSearchParams(location.search);
-      const goToPath = searchParams.get("redirect") || "/login";
-      navigate(goToPath, { replace: true });
+      const goToPath = searchParams.get("redirect");
+      navigate(goToPath || location.pathname, { replace: true });
     }
-    //If user opens login route, then he remains in the same page
-    if (location.pathname === "login" && location.search === "") {
-      navigate("/login", { replace: true });
-    }
-  }, [userInfo, navigate]);
+  }, [userInfo]);
 
   const {
     register,
@@ -45,14 +40,9 @@ const Login = () => {
     toast.loading("Logging in...");
     setSubmitting(true);
     try {
-      const response = await axiosInstance.post("/loginAdmin", values);
-
-      const { author, token } = response.data;
-
-      loginUser(author, token); //Logs in User
-
+      await loginUser(values); //Logs in User
       toast.dismiss();
-      toast.success("Author logged in!");
+      toast.success(`Welcome Author!`);
     } catch (error) {
       handleAxiosError(error, "Failed to Login");
     } finally {
@@ -71,7 +61,10 @@ const Login = () => {
             </h2>
             <button
               className="text-md cursor-pointer font-semibold text-primary-txt  bg-primary px-4 py-2 rounded-lg hover:bg-primary-hover transition"
-              onClick={logoutUser}
+              onClick={() => {
+                logoutUser();
+                toast.success("Author logged out sucessfully!");
+              }}
             >
               Logout
             </button>

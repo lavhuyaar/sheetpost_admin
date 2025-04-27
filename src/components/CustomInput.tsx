@@ -25,7 +25,7 @@ const CustomInput: React.FC<ICustomInput> = ({
         </label>
         <input
           autoComplete="off"
-          value={value}
+          defaultValue={value}
           className="border-text-primary/10 focus:outline-none align-middle border rounded-md px-3 py-2"
           {...register(name, { required: true })}
           type={type}

@@ -65,3 +65,39 @@ main {
   display: flex;
   flex-direction: column;
 }
+
+pre {
+  font-family: "Lexend", sans-serif;
+}
+
+.primary-btn {
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--color-primary-txt);
+  background-color: rgba(var(--primary));
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  &:hover {
+    background-color: var(--color-primary-hover);
+  }
+
+  transition: background-color ease-in-out 150ms;
+}
+
+.secondary-btn {
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--color-primary-txt);
+  background-color: rgba(var(--primary) / 0.4);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  &:hover {
+    background-color: var(--color-primary-hover);
+  }
+
+  transition: background-color ease-in-out 150ms;
+}

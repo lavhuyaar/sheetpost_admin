@@ -1,31 +1,50 @@
 import { createContext, ReactNode, useState } from "react";
-import { IUser } from "../intefaces";
+import { IUser } from "../interfaces";
+import axiosInstance from "../api/axiosInstance";
+import handleAxiosError from "../utils/handleAxiosError";
+import { useNavigate } from "react-router";
 
 interface IAuth {
   userInfo: IUser | null;
-  loginUser: (info: IUser, token: string) => void;
+  loginUser: (credentials: {
+    email: string;
+    password: string;
+  }) => Promise<void>;
   logoutUser: () => void;
 }
 
 const AuthContext = createContext<IAuth | null>(null);
 
 export const AuthProvider = ({ children }: { children?: ReactNode }) => {
-  const localUser = JSON.parse(localStorage.getItem("userInfo") || "null");
-  const [userInfo, setUserInfo] = useState<IUser | null>(localUser);
+  const [userInfo, setUserInfo] = useState<IUser | null>(null);
+  const navigate = useNavigate();
 
-  const loginUser = (info: IUser, token: string) => {
-    setUserInfo(info);
+  const loginUser = async (credentials: {
+    email: string;
+    password: string;
+  }) => {
+    try {
+      const response = await axiosInstance.post("/loginAdmin", credentials);
+      const { author, token } = response.data;
+      setUserInfo(author);
+      const searchParams = new URLSearchParams(location.search);
+      const goToPath = searchParams.get("redirect");
+      navigate(goToPath || location.pathname, { replace: true });
 
-    //Stores credentials and authToken in localStorage
-    localStorage.setItem("userInfo", JSON.stringify(info));
-    localStorage.setItem("authToken", token);
+      //Stores credentials and authToken in localStorage
+      localStorage.setItem("userCredentials", JSON.stringify(credentials));
+      localStorage.setItem("authToken", token);
+    } catch (error) {
+      handleAxiosError(error, "Failed to login author!");
+      setUserInfo(null);
+    }
   };
 
   const logoutUser = () => {
     setUserInfo(null); //Removes userInfo
 
     //Clears localStorage
-    localStorage.removeItem("userInfo");
+    localStorage.removeItem("userCredentials");
     localStorage.removeItem("authToken");
   };
 
