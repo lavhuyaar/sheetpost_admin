@@ -23,7 +23,7 @@ const Modal = ({ children, className, isModalOpen }: IModal) => {
     <>
       {isModalOpen && (
         <div
-          className={` transition-all duration-200 bg-background/80 fixed inset-0 z-[9999] flex items-center justify-center`}
+          className={`transition-all duration-200 bg-background/80 fixed inset-0 z-[9999] flex items-center justify-center`}
         >
           <div
             className={`${

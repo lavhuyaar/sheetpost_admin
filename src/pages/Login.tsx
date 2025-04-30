@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
@@ -107,6 +107,15 @@ const Login = () => {
                 Login
               </button>
             </form>
+            <p>
+              Don't have an account?{" "}
+              <NavLink
+                to="/sign-up"
+                className="text-primary underline hover:text-primary-hover transition"
+              >
+                Sign Up
+              </NavLink>
+            </p>
           </>
         )}
       </main>

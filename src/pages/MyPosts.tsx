@@ -13,6 +13,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PostSkeleton from "../components/skeletons/PostSkeleton";
 import PostCard from "../components/PostCard";
+import Pagination from "../components/Pagination";
+
+const POSTS_LIMIT: number = 12;
 
 const MyPosts = () => {
   const { userInfo } = useAuth();
@@ -20,6 +23,7 @@ const MyPosts = () => {
   const [posts, setPosts] = useState<IPost[] | null>(null);
   const [postsCount, setPostsCount] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [error, setError] = useState<
     { status?: number; message?: string } | undefined
   >(undefined);
@@ -28,7 +32,9 @@ const MyPosts = () => {
   const getAuthorPosts = async () => {
     setLoading(true);
     try {
-      const response = await axiosInstance.get("/posts/admin");
+      const response = await axiosInstance.get(
+        `/posts/admin?limit=${POSTS_LIMIT}&page=${currentPage}`
+      );
       const { posts, totalCount } = response.data;
       setPosts(posts);
       setPostsCount(totalCount);
@@ -42,10 +48,18 @@ const MyPosts = () => {
   useEffect(() => {
     if (!userInfo) {
       navigate("/login?redirect=/posts");
-    } else {
-      getAuthorPosts();
+      return;
     }
-  }, [userInfo]);
+  }, [userInfo, navigate]);
+
+  useEffect(() => {
+    if (!currentPage) return;
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    getAuthorPosts();
+  }, [currentPage]);
 
   const handleDelete = async (postId: string) => {
     toast.loading("Deleting post...");
@@ -68,7 +82,7 @@ const MyPosts = () => {
           error ? "justify-center" : ""
         } p-6 gap-4 text-2xl font-semibold`}
       >
-        <section
+        <div
           className={`posts ${
             error
               ? "self-center justify-self-center"
@@ -83,13 +97,22 @@ const MyPosts = () => {
                     My Posts {postsCount !== null ? `(${postsCount})` : ""}
                   </h1>
                   {posts && posts.length > 0 ? (
-                    posts.map((post) => (
-                      <PostCard
-                        key={post?.id}
-                        {...post}
-                        onDelete={handleDelete}
+                    <>
+                      {posts.map((post) => (
+                        <PostCard
+                          key={post?.id}
+                          {...post}
+                          onDelete={handleDelete}
+                        />
+                      ))}
+                      <Pagination
+                        className="col-span-full mt-4"
+                        limit={POSTS_LIMIT}
+                        currentPage={currentPage}
+                        totalDataLength={postsCount as number}
+                        setCurrentPage={setCurrentPage}
                       />
-                    ))
+                    </>
                   ) : (
                     <div className="h-[60vh] flex items-center justify-center text-center col-span-full">
                       No posts
@@ -111,8 +134,8 @@ const MyPosts = () => {
           ) : (
             // Skeleton posts
             <>
-              <div className="animate-pulse h-8 w-full sm:w-1/5 ml-2 bg-surface col-span-full" />
-              {Array.from({ length: 12 }).map((_, i) => (
+              <div className="animate-pulse h-8 w-4/5 sm:w-1/5 sm:ml-2 bg-surface col-span-full" />
+              {Array.from({ length: POSTS_LIMIT }).map((_, i) => (
                 <PostSkeleton key={i} />
               ))}
             </>
@@ -124,7 +147,7 @@ const MyPosts = () => {
           >
             Add new post
           </NavLink>
-        </section>
+        </div>
       </main>
 
       <Footer />

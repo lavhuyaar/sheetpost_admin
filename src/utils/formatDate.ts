@@ -1,5 +1,6 @@
-const formatDate = (dateString: string) => {
-  const date: string = new Date(dateString).toLocaleDateString();
+// Convert UTC date to Indian format
+const formatDate = (utcDate: string) => {
+  const date: string = new Date(utcDate).toLocaleString("es-IN");
   return date;
 };
 
