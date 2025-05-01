@@ -101,3 +101,19 @@ pre {
 
   transition: background-color ease-in-out 150ms;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-hover);
+}

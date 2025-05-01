@@ -61,7 +61,7 @@ const Home = () => {
               <FeatureCard content="Manage Your blogs and posts easily" />
               <FeatureCard content="Read Comments from your readers" />
               <FeatureCard content="Delete Spam or Hate with a single click" />
-              <FeatureCard content="Share Ideas with the world on your termsy" />
+              <FeatureCard content="Share Ideas with the world on your terms" />
             </div>
           </section>
 
