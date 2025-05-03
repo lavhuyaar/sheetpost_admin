@@ -25,7 +25,7 @@ const AppRoutes = () => {
   //Logs in User automatically if there exists credentials in localStorage
   useEffect(() => {
     const credentials = JSON.parse(
-      localStorage.getItem("userCredentials") || "null"
+      localStorage.getItem("authorCredentials") || "null"
     );
 
     if (!credentials) {

@@ -18,7 +18,7 @@ const Header = () => {
       <nav className="w-full max-w-screen-2xl flex items-center justify-between px-4 py-2">
         <NavLink to="/" className="text-3xl font-bold align-middle">
           <img
-            src="/public/images/sheetpost_logo_dark.png"
+            src="/images/sheetpost_logo_dark.png"
             alt=""
             className="size-12"
           />

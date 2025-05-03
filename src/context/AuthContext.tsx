@@ -34,8 +34,8 @@ export const AuthProvider = ({ children }: { children?: ReactNode }) => {
       navigate(goToPath || location.pathname, { replace: true });
 
       //Stores credentials and authToken in localStorage
-      localStorage.setItem("userCredentials", JSON.stringify(credentials));
-      localStorage.setItem("authToken", token);
+      localStorage.setItem("authorCredentials", JSON.stringify(credentials));
+      localStorage.setItem("authorToken", token);
     } catch (error) {
       handleAxiosError(error, "Failed to login author!");
       setUserInfo(null);
@@ -46,8 +46,8 @@ export const AuthProvider = ({ children }: { children?: ReactNode }) => {
     setUserInfo(null); //Removes userInfo
 
     //Clears localStorage
-    localStorage.removeItem("userCredentials");
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("authorCredentials");
+    localStorage.removeItem("authorToken");
   };
 
   return (
@@ -57,4 +57,4 @@ export const AuthProvider = ({ children }: { children?: ReactNode }) => {
   );
 };
 
-export default AuthContext;
+export { AuthContext };

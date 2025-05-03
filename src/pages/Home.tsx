@@ -20,13 +20,13 @@ const Logo = () => {
 
   return theme === "dark" ? (
     <img
-      src="/public/images/sheetpost_logo_dark.png"
+      src="/images/sheetpost_logo_dark.png"
       alt=""
       className="size-60"
     />
   ) : (
     <img
-      src="/public/images/sheetpost_logo_light.png"
+      src="/images/sheetpost_logo_light.png"
       alt=""
       className="size-60"
     />

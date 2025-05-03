@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("authToken"); //Auth token
+    const token = localStorage.getItem("authorToken"); //Auth token
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -24,8 +24,8 @@ axiosInstance.interceptors.response.use(undefined, (error) => {
   //Invalid token (expired token or token not found)
   if (errorStatus === 403) {
     //Removes credentials from localStorage(if any) and asks user to login
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userCredentials");
+    localStorage.removeItem("authorToken");
+    localStorage.removeItem("authorCredentials");
 
     window.location.href = "/login";
   }
