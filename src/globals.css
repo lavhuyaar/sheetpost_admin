@@ -109,11 +109,3 @@ pre {
 ::-webkit-scrollbar-track {
   background: rgba(var(--background));
 }
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-hover);
-}
